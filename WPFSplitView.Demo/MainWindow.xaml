@@ -1,0 +1,46 @@
+﻿<Window x:Class="WPFSplitView.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFSplitView.Demo"        
+        xmlns:sv="clr-namespace:WPFSplitView;assembly=WPFSplitView"
+        mc:Ignorable="d"
+        xmlns:a="clr-namespace:WPFSplitView.Animations;assembly=WPFSplitView"
+        Title="MainWindow" Height="720" Width="1280" Background="#FFC5FF00">    
+    <Grid DataContext="{Binding ElementName=sv}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Background="DimGray">
+            <TextBlock Text="PanePlacement" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+            <ComboBox SelectedItem="{Binding PanePlacement}" Margin="5">
+                <sv:SplitViewPanePlacement>Right</sv:SplitViewPanePlacement>
+                <sv:SplitViewPanePlacement>Left</sv:SplitViewPanePlacement>
+            </ComboBox>
+            <TextBlock Text="DisplayMode" VerticalAlignment="Center" Margin="5"  Foreground="White"/>
+            <ComboBox SelectedItem="{Binding DisplayMode}" Margin="5">
+                <sv:SplitViewDisplayMode>Overlay</sv:SplitViewDisplayMode>
+                <sv:SplitViewDisplayMode>Inline</sv:SplitViewDisplayMode>
+                <sv:SplitViewDisplayMode>CompactInline</sv:SplitViewDisplayMode>
+                <sv:SplitViewDisplayMode>CompactOverlay</sv:SplitViewDisplayMode>
+            </ComboBox>
+            <CheckBox Content="IsPaneOpen" IsChecked="{Binding IsPaneOpen}" Margin="5" VerticalAlignment="Center" Foreground="White"/>
+        </StackPanel>
+        <sv:SplitView Name="sv" Grid.Row="1" OpenPaneLength="800">
+            <Rectangle Fill="Red" Width="400" Height="400"/>
+            <sv:SplitView.Pane>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontSize="18">
+                    <TextBlock.Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </TextBlock.Text>
+                </TextBlock>
+            </sv:SplitView.Pane>
+        </sv:SplitView>
+    </Grid>
+</Window>
