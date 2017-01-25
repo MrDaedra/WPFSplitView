@@ -28,18 +28,14 @@ namespace WPFSplitView
     [TemplateVisualState(GroupName = "DisplayModeStates", Name = "OpenCompactOverlayLeft")]
     [TemplateVisualState(GroupName = "DisplayModeStates", Name = "OpenCompactOverlayRight")]
     [TemplatePart(Name = "LightDismissLayer", Type = typeof(UIElement))]
-    [TemplatePart(Name = "PaneClipRectangle", Type = typeof(RectangleGeometry))]
     [DefaultProperty("Content")]
     [ContentProperty("Content")]
     public partial class SplitView : Control
     {        
         public SplitView()
         {
-            InitializeComponent();
-            this.DataContext = this;       
+            InitializeComponent();              
         }
-        
-        
 
         public override void OnApplyTemplate()
         {
@@ -48,7 +44,6 @@ namespace WPFSplitView
             base.OnApplyTemplate();
 
             UIElement lightDismissLayer;
-            RectangleGeometry paneClipRectangle;
 
             lightDismissLayer = GetTemplateChild("LightDismissLayer") as UIElement;
             if (lightDismissLayer != null)
@@ -58,14 +53,12 @@ namespace WPFSplitView
                 lightDismissLayer.PreviewMouseDown += OnLightDismiss;
             }
 
-            paneClipRectangle = GetTemplateChild("PaneClipRectangle") as RectangleGeometry;
-            if (paneClipRectangle != null)
-                paneClipRectangle.Rect = new Rect(0, 0, OpenPaneLength, double.MaxValue);
+            Control proxy = GetTemplateChild("proxy") as Control;
         }
 
         protected virtual void OnLightDismiss()
         {
-            if (LightDismissOverlayMode == LightDismissOverlayMode.On)
+            if (LightDismissOverlayMode == LightDismissOverlayMode.On || LightDismissOverlayMode == LightDismissOverlayMode.Auto)
             {
                 if (IsPaneOpen && !IsInline)
                     IsPaneOpen = false;
@@ -145,7 +138,7 @@ namespace WPFSplitView
         }
         
         public static readonly DependencyProperty IsPaneOpenProperty =
-            DependencyProperty.Register("IsPaneOpen", typeof(bool), typeof(SplitView), new PropertyMetadata(true, OnIsPaneOpenChanged));
+            DependencyProperty.Register("IsPaneOpen", typeof(bool), typeof(SplitView), new PropertyMetadata(false, OnIsPaneOpenChanged));
 
         public LightDismissOverlayMode LightDismissOverlayMode
         {
@@ -154,7 +147,7 @@ namespace WPFSplitView
         }
         
         public static readonly DependencyProperty LightDismissOverlayModeProperty =
-            DependencyProperty.Register("LightDismissOverlayMode", typeof(LightDismissOverlayMode), typeof(SplitView), new PropertyMetadata(LightDismissOverlayMode.Off));
+            DependencyProperty.Register("LightDismissOverlayMode", typeof(LightDismissOverlayMode), typeof(SplitView), new PropertyMetadata(LightDismissOverlayMode.Auto));
                 
         public double OpenPaneLength
         {
@@ -256,6 +249,7 @@ namespace WPFSplitView
             }
             else
             {
+                state = "Closed";
                 if (IsCompact)
                     state += "Compact";
                 else
