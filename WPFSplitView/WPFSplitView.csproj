@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Animations\GridLengthAnimation.cs" />
     <Compile Include="Animations\GridLengthAnimationBase.cs" />
+    <Compile Include="Extensions\InitializerExtension.cs" />
     <Compile Include="LightDismissOverlayMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitView.xaml.cs">
