@@ -7,8 +7,7 @@
         xmlns:local="clr-namespace:WPFSplitView.Demo"        
         xmlns:sv="clr-namespace:WPFSplitView;assembly=WPFSplitView"
         mc:Ignorable="d"
-        xmlns:a="clr-namespace:WPFSplitView.Animations;assembly=WPFSplitView"
-        Title="MainWindow" Height="720" Width="1280" Background="#FFC5FF00">    
+        Title="MainWindow" Height="720" Width="1280" Background="#FFC5FF00">
     <Grid DataContext="{Binding ElementName=sv}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -29,8 +28,8 @@
             </ComboBox>
             <CheckBox Content="IsPaneOpen" IsChecked="{Binding IsPaneOpen}" Margin="5" VerticalAlignment="Center" Foreground="White"/>
         </StackPanel>
-        <sv:SplitView Name="sv" Grid.Row="1" OpenPaneLength="800">
-            <Rectangle Fill="Red" Width="400" Height="400"/>
+        <sv:SplitView Name="sv" Grid.Row="1">
+            <Rectangle Fill="Red" Width="320" Height="400"/>
             <sv:SplitView.Pane>
                 <TextBlock TextWrapping="Wrap" Foreground="White" FontSize="18">
                     <TextBlock.Text>
