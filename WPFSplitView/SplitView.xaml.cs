@@ -43,7 +43,7 @@ namespace WPFSplitView
                 lightDismissLayer.PreviewMouseDown += OnLightDismiss;
             }
 
-            Control proxy = GetTemplateChild("proxy") as Control;
+            OnVisualStateChanged();
         }
 
         protected virtual void OnLightDismiss()
